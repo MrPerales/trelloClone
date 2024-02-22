@@ -1,0 +1,74 @@
+<div class="w-screen h-screen bg-gray-100 sm:bg-gray-50 relative">
+  <div class="w-full absolute h-full sm:block hidden">
+    <img
+      class="absolute lg:w-96 w-60 bottom-0 right-0"
+      src="/assets/svg/undraw_sign_up_n6im.svg"
+      alt="right"
+    />
+    <img
+      class="absolute lg:w-96 w-60 bottom-0 left-0"
+      src="/assets/svg/undraw_team_up_re_84ok.svg"
+      alt="left"
+    />
+  </div>
+  <div class="relative sm:w-7/12 md:w-6/12 lg:w-4/12 m-auto">
+    <header class="pb-2 pt-6 flex justify-center">
+      <img
+        class="w-56"
+        src="assets/images/logo/logo-gradient-blue-trello.png"
+        alt="logo"
+      />
+    </header>
+    <div class="bg-white rounded shadow px-6 py-2 sm:shadow-lg md:px-10">
+      <div class="mb-4">
+        <h1 class="text-center font-semibold pt-4 pb-8">Log in to Trello</h1>
+        <form novalidate class="space-y-6 mb-4">
+          <div class="relative">
+            <input
+              class="w-full bg-gray-100 rounded border-2 border-gray-300"
+              placeholder="Enter email"
+              type="email"
+            />
+          </div>
+          <div>
+            <input
+              class="w-full bg-gray-100 rounded border-2 border-gray-300"
+              placeholder="password"
+              type="password"
+            />
+          </div>
+          <div>
+            <button
+              class="w-full text-white font-medium rounded text-sm bg-green-600 py-2 px-5"
+              type="submit"
+            >
+              Log in
+            </button>
+          </div>
+        </form>
+      </div>
+
+      <hr class="my-4 border-b-1 border-r-gray-300" />
+      <div
+        class="flex justify-center items-center space-x-0 space-y-2 md:space-x-2 md:space-y-0 flex-col md:flex-row"
+      >
+        <a routerLink="/forgot-password" class="text-blue-600 font-light"
+          >Can't log in?</a
+        >
+        <span class="text-gray-500 hidden md:block">•</span>
+        <a routerLink="/register" class="text-blue-600 font-light"
+          >Sign up for an account</a
+        >
+      </div>
+    </div>
+
+    <hr class="mt-14 border-b-1 border-r-gray-300" />
+    <div class="flex justify-center">
+      <img
+        class="w-32 mt-4"
+        src="/assets/images/logo/horizontal-logo-onecolor-blue-atlassian.png"
+        alt="logo"
+      />
+    </div>
+  </div>
+</div>
