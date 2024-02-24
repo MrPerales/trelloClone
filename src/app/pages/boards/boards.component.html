@@ -1,1 +1,46 @@
 <app-navbar></app-navbar>
+<main class="container mx-auto flex mt-14">
+  <aside class="w-3/12 mr-4">
+    <div>
+      <ul class="flex flex-col gap-2 text-gray-700 font-medium">
+        <li class="hover:bg-blue-200 rounded-md">
+          <a class="block py-1 px-3">
+            <fa-icon [icon]="faTrello"></fa-icon>
+            Boards
+          </a>
+        </li>
+        <li class="hover:bg-blue-200 rounded-md">
+          <a class="block py-1 px-3">
+            <fa-icon [icon]="faBox"></fa-icon>
+            Template
+          </a>
+        </li>
+        <li class="hover:bg-blue-200 rounded-md">
+          <a class="block py-1 px-3">
+            <fa-icon [icon]="faWaveSquare"></fa-icon>
+            Home
+          </a>
+        </li>
+      </ul>
+    </div>
+  </aside>
+  <section class="w-full">
+    <h1 class="flex gap-2 font-bold text-lg">
+      <fa-icon [icon]="faClock"></fa-icon>Recently viewed
+    </h1>
+    <div class="grid grid-cols-4 mt-3 gap-2">
+      <div class="w-full h-24 rounded text-white font-bold bg-blue-400 p-1">
+        Demo
+      </div>
+      <div class="w-full h-24 rounded text-white font-bold bg-blue-400 p-1">
+        Demo
+      </div>
+      <div class="w-full h-24 rounded text-white font-bold bg-blue-400 p-1">
+        Demo
+      </div>
+      <div class="w-full h-24 rounded text-white font-bold bg-blue-400 p-1">
+        Demo
+      </div>
+    </div>
+  </section>
+</main>
