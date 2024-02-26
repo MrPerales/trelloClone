@@ -2,7 +2,7 @@
 <main class="container mx-auto flex mt-14">
   <aside class="w-3/12 mr-4">
     <div>
-      <ul class="flex flex-col gap-2 text-gray-700 font-medium">
+      <ul class="flex flex-col gap-2 text-gray-700 font-medium mb-10">
         <li class="hover:bg-blue-200 rounded-md">
           <a class="block py-1 px-3">
             <fa-icon [icon]="faTrello"></fa-icon>
@@ -21,9 +21,56 @@
             Home
           </a>
         </li>
+        <!-- accordion -->
       </ul>
+      <cdk-accordion>
+        <cdk-accordion-item #accordionWorkSpace="cdkAccordionItem">
+          <!-- para cambiar el estado de la propiedad expand -->
+          <button
+            class="w-full py-1 px-2 flex justify-between items-center"
+            type="button"
+            (click)="accordionWorkSpace.toggle()"
+          >
+            My workspace
+            <fa-icon
+              [icon]="accordionWorkSpace.expanded ? faAngleUp : faAngleDown"
+            ></fa-icon>
+          </button>
+          <!-- -->
+          <div [style.display]="accordionWorkSpace.expanded ? '' : 'none'">
+            <ul class="ml-2 flex flex-col text-sm text-gray-700">
+              <li>
+                <a class="block py-1 px-3"
+                  ><fa-icon [icon]="faTrello"></fa-icon> Boards</a
+                >
+              </li>
+              <li>
+                <a class="block py-1 px-3"
+                  ><fa-icon [icon]="faHeart"></fa-icon> Highlights</a
+                >
+              </li>
+              <li>
+                <a class="block py-1 px-3"
+                  ><fa-icon [icon]="faBorderAll"></fa-icon> Views</a
+                >
+              </li>
+              <li>
+                <a class="block py-1 px-3"
+                  ><fa-icon [icon]="faUsers"></fa-icon> Members</a
+                >
+              </li>
+              <li>
+                <a class="block py-1 px-3"
+                  ><fa-icon [icon]="faGear"></fa-icon> Settings</a
+                >
+              </li>
+            </ul>
+          </div>
+        </cdk-accordion-item>
+      </cdk-accordion>
     </div>
   </aside>
+
   <section class="w-full">
     <h1 class="flex gap-2 font-bold text-lg">
       <fa-icon [icon]="faClock"></fa-icon>Recently viewed
