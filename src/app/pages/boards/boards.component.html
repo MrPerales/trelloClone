@@ -21,8 +21,9 @@
             Home
           </a>
         </li>
-        <!-- accordion -->
       </ul>
+      <!-- accordion -->
+
       <cdk-accordion>
         <cdk-accordion-item #accordionWorkSpace="cdkAccordionItem">
           <!-- para cambiar el estado de la propiedad expand -->
@@ -34,7 +35,8 @@
             My workspace
             <fa-icon
               [icon]="accordionWorkSpace.expanded ? faAngleUp : faAngleDown"
-            ></fa-icon>
+            >
+            </fa-icon>
           </button>
           <!-- -->
           <div [style.display]="accordionWorkSpace.expanded ? '' : 'none'">
@@ -67,6 +69,36 @@
             </ul>
           </div>
         </cdk-accordion-item>
+      </cdk-accordion>
+
+      <!--dinamic accordion  -->
+      <cdk-accordion>
+        @for (item of itemList; track $index) {
+
+        <cdk-accordion-item #accordionItemList="cdkAccordionItem">
+          <button
+            class="w-full py-1 px-2 flex justify-between items-center"
+            type="button"
+            (click)="accordionItemList.toggle()"
+          >
+            {{ item.label }}
+            <fa-icon
+              [icon]="accordionWorkSpace.expanded ? faAngleUp : faAngleDown"
+            >
+            </fa-icon>
+          </button>
+          @for (subItem of item.items; track $index) {
+
+          <div [style.display]="accordionItemList.expanded ? '' : 'none'">
+            <ul class="ml-2 flex flex-col text-sm text-gray-700">
+              <li class="block py-1 px-3">
+                {{ subItem.label }}
+              </li>
+            </ul>
+          </div>
+          }
+        </cdk-accordion-item>
+        }
       </cdk-accordion>
     </div>
   </aside>
