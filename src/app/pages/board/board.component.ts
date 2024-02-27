@@ -6,7 +6,7 @@ import {
   transferArrayItem,
 } from '@angular/cdk/drag-drop';
 import { NavbarComponent } from '../../components/navbar/navbar.component';
-import { toDO } from '../../models/toDo.Model';
+import { column, toDO } from '../../models/toDo.Model';
 @Component({
   selector: 'app-board',
   standalone: true,
@@ -27,36 +27,53 @@ import { toDO } from '../../models/toDo.Model';
   ],
 })
 export class BoardComponent {
-  todos: toDO[] = [
+  columns: column[] = [
     {
       id: '1',
-      title: 'buy a game',
+      title: 'toDo',
+      todos: [
+        {
+          id: '1',
+          title: 'buy a game',
+        },
+        {
+          id: '2',
+          title: 'wathc a movie',
+        },
+        {
+          id: '3',
+          title: 'Make dishes',
+        },
+      ],
     },
     {
       id: '2',
-      title: 'wathc a movie',
+      title: 'doing',
+      todos: [
+        {
+          id: '4',
+          title: 'play games',
+        },
+        {
+          id: '6',
+          title: 'coding',
+        },
+      ],
     },
     {
       id: '3',
-      title: 'Make dishes',
+      title: 'done',
+      todos: [
+        {
+          id: '5',
+          title: 'make homework',
+        },
+      ],
     },
   ];
-  doing: toDO[] = [
-    {
-      id: '4',
-      title: 'play games',
-    },
-    {
-      id: '6',
-      title: 'coding',
-    },
-  ];
-  done: toDO[] = [
-    {
-      id: '5',
-      title: 'make homework',
-    },
-  ];
+  todos: toDO[] = [];
+  doing: toDO[] = [];
+  done: toDO[] = [];
   drop(event: CdkDragDrop<toDO[]>) {
     // validacion para ver si el moviemiento es en la misma columna y
     // hacemos reordenamiento
@@ -85,5 +102,12 @@ export class BoardComponent {
         event.currentIndex
       );
     }
+  }
+  addNewColumn() {
+    this.columns.push({
+      id: '',
+      title: 'new Column',
+      todos: [],
+    });
   }
 }
