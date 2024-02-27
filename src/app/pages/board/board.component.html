@@ -37,6 +37,38 @@
             </div>
             }
           </div>
+          <cdk-accordion>
+            <cdk-accordion-item #accordionAddCard="cdkAccordionItem">
+              <div class="flex flex-col gap-4 w-full mt-3">
+                <!-- input -->
+                <div
+                  class="rounded bg-gray-200 flex flex-col"
+                  [style.display]="accordionAddCard.expanded ? '' : 'none'"
+                >
+                  <input class="w-full rounded" type="text" />
+
+                  <div class="flex items-center px-1 py-1 gap-5 mt-2">
+                    <app-btn [typeBtn]="'button'" [color]="'primary'">
+                      Add card
+                    </app-btn>
+                    <button (click)="accordionAddCard.toggle()" type="button">
+                      <fa-icon class="font-bold" [icon]="faX"></fa-icon>
+                    </button>
+                  </div>
+                </div>
+                <!-- button -->
+                <div
+                  [style.display]="accordionAddCard.expanded ? 'none' : ''"
+                  class="w-full py-1 px-2 flex justify-between text-center font-light"
+                >
+                  <button (click)="accordionAddCard.toggle()">
+                    <fa-icon [icon]="faPlus"></fa-icon> Add Card
+                  </button>
+                  <fa-icon [icon]="faSquarePollHorizontal"></fa-icon>
+                </div>
+              </div>
+            </cdk-accordion-item>
+          </cdk-accordion>
         </div>
         }
         <button class="shrink-0" type="button" (click)="addNewColumn()">

@@ -7,10 +7,25 @@ import {
 } from '@angular/cdk/drag-drop';
 import { NavbarComponent } from '../../components/navbar/navbar.component';
 import { column, toDO } from '../../models/toDo.Model';
+import { CdkAccordionModule } from '@angular/cdk/accordion';
+import {
+  faCircleXmark,
+  faPlus,
+  faSquarePollHorizontal,
+  faX,
+} from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { BtnComponent } from '../../components/btn/btn.component';
 @Component({
   selector: 'app-board',
   standalone: true,
-  imports: [DragDropModule, NavbarComponent],
+  imports: [
+    DragDropModule,
+    NavbarComponent,
+    CdkAccordionModule,
+    FontAwesomeModule,
+    BtnComponent,
+  ],
   templateUrl: './board.component.html',
   styles: [
     `
@@ -27,6 +42,12 @@ import { column, toDO } from '../../models/toDo.Model';
   ],
 })
 export class BoardComponent {
+  // icons
+  faSquarePollHorizontal = faSquarePollHorizontal;
+  faPlus = faPlus;
+  faX = faX;
+
+  addCard = false;
   columns: column[] = [
     {
       id: '1',
@@ -104,10 +125,15 @@ export class BoardComponent {
     }
   }
   addNewColumn() {
+    const id = Date.now();
+    const idString = id.toString();
+    // console.log(idString);
+
     this.columns.push({
-      id: '',
+      id: idString,
       title: 'new Column',
       todos: [],
     });
   }
+  addNewCard() {}
 }
