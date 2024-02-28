@@ -130,6 +130,9 @@ export class BoardComponent {
       );
     }
   }
+  dropHorizontal(event: CdkDragDrop<column[]>) {
+    moveItemInArray(this.columns, event.previousIndex, event.currentIndex);
+  }
   addNewColumn() {
     const id = Date.now();
     const idString = id.toString();

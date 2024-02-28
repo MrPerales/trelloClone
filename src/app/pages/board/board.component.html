@@ -1,5 +1,6 @@
 <div class="flex flex-col h-screen">
   <app-navbar></app-navbar>
+
   <div class="w-full grow bg-sky-600 px-4 pb-4">
     <div class="flex flex-col h-full">
       <div>
@@ -7,19 +8,26 @@
       </div>
 
       <!-- cdkDropListGroup para hacer cambio entre listas  -->
+      <!--mover cards entre otras (horizontal) 
+      cdkDropList
+      cdkDropListOrientation="horizontal" -->
       <div
+        cdkDropList
+        cdkDropListOrientation="horizontal"
+        (cdkDropListDropped)="dropHorizontal($event)"
         class="flex grow items-start w-full h-full overflow-x-auto"
         cdkDropListGroup
       >
+        <!-- cdkDrag para poder mover horizontal las cards -->
         @for (column of columns; track $index) {
-        <div class="rounded bg-gray-200 w-72 p-2 mr-3 shrink-0">
+        <div class="rounded bg-gray-200 w-72 p-2 mr-3 shrink-0" cdkDrag>
           <div class="flex justify-between py-1">
             <h3 class="text-sm font-bold ml-2">{{ column.title }}</h3>
           </div>
           <!-- cdkDropList para que no se salgan de esa zona  -->
           <!-- (cdkDropListDropped) captura el evento que se movio  -->
           <!-- [cdkDropListData]="todos" nos lo pide de nuevo para hacer el cambio 
-             entre listas en cada lista -->
+           entre listas en cada lista -->
 
           <div
             cdkDropList
