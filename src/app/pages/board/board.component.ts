@@ -9,13 +9,13 @@ import { NavbarComponent } from '../../components/navbar/navbar.component';
 import { column, toDO } from '../../models/toDo.Model';
 import { CdkAccordionModule } from '@angular/cdk/accordion';
 import {
-  faCircleXmark,
   faPlus,
   faSquarePollHorizontal,
   faX,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { BtnComponent } from '../../components/btn/btn.component';
+import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 @Component({
   selector: 'app-board',
   standalone: true,
@@ -25,6 +25,7 @@ import { BtnComponent } from '../../components/btn/btn.component';
     CdkAccordionModule,
     FontAwesomeModule,
     BtnComponent,
+    ReactiveFormsModule,
   ],
   templateUrl: './board.component.html',
   styles: [
@@ -46,7 +47,12 @@ export class BoardComponent {
   faSquarePollHorizontal = faSquarePollHorizontal;
   faPlus = faPlus;
   faX = faX;
-
+  // forms
+  newCardCtrl = new FormControl('', {
+    nonNullable: true,
+    validators: [Validators.required, Validators.minLength(3)],
+  });
+  // cdk accordion
   addCard = false;
   columns: column[] = [
     {
@@ -135,5 +141,22 @@ export class BoardComponent {
       todos: [],
     });
   }
-  addNewCard() {}
+  addNewCard(index: number) {
+    if (this.newCardCtrl.valid) {
+      const value = this.newCardCtrl.value;
+      // console.log(value);
+
+      const id = Date.now();
+      const idString = id.toString();
+      // add
+      const newTaskTitle = {
+        id: idString,
+        title: value,
+      };
+      this.columns[index].todos.push(newTaskTitle);
+
+      // clear input
+      this.newCardCtrl.setValue('');
+    }
+  }
 }

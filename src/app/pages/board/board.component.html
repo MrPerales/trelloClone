@@ -45,10 +45,20 @@
                   class="rounded bg-gray-200 flex flex-col"
                   [style.display]="accordionAddCard.expanded ? '' : 'none'"
                 >
-                  <input class="w-full rounded" type="text" />
+                  <input
+                    placeholder="Enter a title for  the card"
+                    class="w-full rounded font-light"
+                    type="text"
+                    [formControl]="newCardCtrl"
+                    (keydown.enter)="addNewCard($index)"
+                  />
 
                   <div class="flex items-center px-1 py-1 gap-5 mt-2">
-                    <app-btn [typeBtn]="'button'" [color]="'primary'">
+                    <app-btn
+                      (click)="addNewCard($index)"
+                      [typeBtn]="'button'"
+                      [color]="'primary'"
+                    >
                       Add card
                     </app-btn>
                     <button (click)="accordionAddCard.toggle()" type="button">
