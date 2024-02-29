@@ -166,7 +166,7 @@ export class BoardComponent {
     }
   }
   openDialog(todo: toDO) {
-    this.dialog.open(ModalComponent, {
+    const dialogRef = this.dialog.open(ModalComponent, {
       minWidth: '300px',
       maxWidth: '50%',
       autoFocus: false,
@@ -175,5 +175,7 @@ export class BoardComponent {
         todo: todo,
       },
     });
+    // para obtener una respuesta desde el modal
+    dialogRef.closed.subscribe((output) => console.log(output));
   }
 }

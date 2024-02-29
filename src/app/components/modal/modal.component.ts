@@ -17,6 +17,10 @@ import { toDO } from '../../models/toDo.Model';
 interface InputData {
   todo: toDO;
 }
+// tipado para la respuesta
+interface OutputData {
+  rta: boolean;
+}
 
 @Component({
   selector: 'app-modal',
@@ -35,7 +39,7 @@ export class ModalComponent {
   faClock = faClock;
 
   constructor(
-    private dialogRef: DialogRef<InputData>,
+    private dialogRef: DialogRef<OutputData>,
     // obtenemos los datos que nos mandaron
     @Inject(DIALOG_DATA) data: InputData
   ) {
@@ -44,5 +48,10 @@ export class ModalComponent {
   }
   closeModal() {
     this.dialogRef.close();
+  }
+  closeWithRta(rta: boolean) {
+    this.dialogRef.close({
+      rta,
+    });
   }
 }
