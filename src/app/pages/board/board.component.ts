@@ -165,11 +165,15 @@ export class BoardComponent {
       this.newCardCtrl.setValue('');
     }
   }
-  openDialog() {
+  openDialog(todo: toDO) {
     this.dialog.open(ModalComponent, {
       minWidth: '300px',
       maxWidth: '50%',
       autoFocus: false,
+      // mandamos los datos al modal
+      data: {
+        todo: todo,
+      },
     });
   }
 }
