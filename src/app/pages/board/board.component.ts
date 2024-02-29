@@ -16,6 +16,8 @@ import {
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { BtnComponent } from '../../components/btn/btn.component';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Dialog } from '@angular/cdk/dialog';
+import { ModalComponent } from '../../components/modal/modal.component';
 @Component({
   selector: 'app-board',
   standalone: true,
@@ -43,6 +45,7 @@ import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
   ],
 })
 export class BoardComponent {
+  constructor(private dialog: Dialog) {}
   // icons
   faSquarePollHorizontal = faSquarePollHorizontal;
   faPlus = faPlus;
@@ -161,5 +164,12 @@ export class BoardComponent {
       // clear input
       this.newCardCtrl.setValue('');
     }
+  }
+  openDialog() {
+    this.dialog.open(ModalComponent, {
+      minWidth: '300px',
+      maxWidth: '50%',
+      autoFocus: false,
+    });
   }
 }
