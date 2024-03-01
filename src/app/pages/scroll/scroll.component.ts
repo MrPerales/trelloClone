@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NavbarComponent } from '../../components/navbar/navbar.component';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
-
+import { ScrollingModule } from '@angular/cdk/scrolling';
 // typado
 interface Product {
   id: string;
@@ -13,7 +13,7 @@ interface Product {
 @Component({
   selector: 'app-scroll',
   standalone: true,
-  imports: [NavbarComponent, HttpClientModule],
+  imports: [NavbarComponent, HttpClientModule, ScrollingModule],
   templateUrl: './scroll.component.html',
 })
 export class ScrollComponent {
