@@ -17,7 +17,7 @@
       ></tr>
       <!--  -->
       <tr
-        class="even:bg-gray-50"
+        class=""
         cdk-row
         *cdkRowDef="let row; columns: colums"
         [ngClass]="{ 'bg-red-400': row.price < 100 }"
@@ -64,6 +64,16 @@
         <th class="px-6 py-3" cdk-header-cell *cdkHeaderCellDef>cover</th>
         <td class="px-6 py-4" cdk-cell *cdkCellDef="let row">
           <img [src]="row.images[1]" class="w-12" alt="" />
+        </td>
+        <td class="px-6 py-3" cdk-footer-cell *cdkFooterCellDef></td>
+      </ng-container>
+      <!-- title column  -->
+      <ng-container cdkColumnDef="actions">
+        <th class="px-6 py-3" cdk-header-cell *cdkHeaderCellDef>actions</th>
+        <td class="px-6 py-4" cdk-cell *cdkCellDef="let row">
+          <app-btn color="primary" typeBtn="submit" (click)="update(row)">
+            Update
+          </app-btn>
         </td>
         <td class="px-6 py-3" cdk-footer-cell *cdkFooterCellDef></td>
       </ng-container>

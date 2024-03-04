@@ -25,4 +25,20 @@ export class DataSourceProduct extends DataSource<Product> {
     const total = productsPrice.reduce((price, total) => total + price, 0);
     return total;
   }
+  //Partial para que todas las propiedades de un producto sean opcionales y asi poder editar
+  update(id: Product['id'], changes: Partial<Product>) {
+    const products = this.data.getValue();
+    const productIndex = products.findIndex((product) => product.id === id); // 0 === false
+    // !== -1 ya que si el index del producto es el 0 va a dar falso y no entra
+    if (productIndex !== -1) {
+      // actualizamos
+      products[productIndex] = {
+        // agregamos la misma info que teniamos
+        ...products[productIndex],
+        ...changes,
+      };
+      //   actualizamos en todo el array
+      this.data.next(products);
+    }
+  }
 }
