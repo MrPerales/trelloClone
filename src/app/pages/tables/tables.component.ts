@@ -1,17 +1,19 @@
 import { Component } from '@angular/core';
 import { NavbarComponent } from '../../components/navbar/navbar.component';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { ScrollingModule } from '@angular/cdk/scrolling';
+import { CdkTableModule } from '@angular/cdk/table';
 import { Product } from '../../models/product.model';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 @Component({
-  selector: 'app-scroll',
+  selector: 'app-tables',
   standalone: true,
-  imports: [NavbarComponent, HttpClientModule, ScrollingModule],
-  templateUrl: './scroll.component.html',
+  imports: [NavbarComponent, CdkTableModule, HttpClientModule],
+  templateUrl: './tables.component.html',
 })
-export class ScrollComponent {
+export class TablesComponent {
   products: Product[] = [];
+  // las columnas se van a renderizar de acuerdo a la posicion del array
+  colums: string[] = ['id', 'title', 'price', 'cover'];
   constructor(private http: HttpClient) {}
 
   ngOnInit() {

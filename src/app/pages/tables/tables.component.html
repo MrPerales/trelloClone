@@ -1,0 +1,38 @@
+<div class="flex flex-col h-screen">
+  <app-navbar></app-navbar>
+  <div class="w-full grow bg-white p-6">
+    <!-- [dataSource]="product" pasamos el array  -->
+    <table cdk-table [dataSource]="products">
+      <!-- mostramos el nombre de las columnas del array que creamos  -->
+      <tr cdk-header-row *cdkHeaderRowDef="colums"></tr>
+      <tr cdk-row *cdkRowDef="let row; columns: colums"></tr>
+
+      <!-- Id column  -->
+      <!-- cdkColumnDef="id" tiene que tener el mismo nombre que en el array  -->
+      <ng-container cdkColumnDef="id">
+        <th cdk-header-cell *cdkHeaderCellDef>id</th>
+        <td cdk-cell *cdkCellDef="let row">{{ row.id }}</td>
+      </ng-container>
+
+      <!-- title column  -->
+      <ng-container cdkColumnDef="title">
+        <th cdk-header-cell *cdkHeaderCellDef>title</th>
+        <td cdk-cell *cdkCellDef="let row">{{ row.title }}</td>
+      </ng-container>
+
+      <!-- price column  -->
+      <ng-container cdkColumnDef="price">
+        <th cdk-header-cell *cdkHeaderCellDef>price</th>
+        <td cdk-cell *cdkCellDef="let row">{{ row.price }}</td>
+      </ng-container>
+
+      <!-- cover column  -->
+      <ng-container cdkColumnDef="cover">
+        <th cdk-header-cell *cdkHeaderCellDef>cover</th>
+        <td cdk-cell *cdkCellDef="let row">
+          <img [src]="row.images[0]" class="w-28" alt="" />
+        </td>
+      </ng-container>
+    </table>
+  </div>
+</div>

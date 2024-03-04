@@ -3,6 +3,7 @@ import { LoginComponent } from './pages/login/login.component';
 import { BoardsComponent } from './pages/boards/boards.component';
 import { BoardComponent } from './pages/board/board.component';
 import { ScrollComponent } from './pages/scroll/scroll.component';
+import { TablesComponent } from './pages/tables/tables.component';
 
 export const routes: Routes = [
   {
@@ -20,5 +21,9 @@ export const routes: Routes = [
   {
     path: 'scroll',
     component: ScrollComponent,
+  },
+  {
+    path: 'tables',
+    component: TablesComponent,
   },
 ];
