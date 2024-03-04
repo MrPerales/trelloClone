@@ -6,7 +6,7 @@
     <table
       class="w-full text-sm text-left text-gray-500"
       cdk-table
-      [dataSource]="products"
+      [dataSource]="dataSourceProducts"
     >
       <!-- mostramos el nombre de las columnas del array que creamos  -->
       <!-- headers -->
@@ -17,9 +17,10 @@
       ></tr>
       <!--  -->
       <tr
-        class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50"
+        class="even:bg-gray-50"
         cdk-row
         *cdkRowDef="let row; columns: colums"
+        [ngClass]="{ 'bg-red-400': row.price < 100 }"
       ></tr>
       <!-- footer -->
       <tr

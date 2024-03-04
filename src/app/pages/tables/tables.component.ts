@@ -4,7 +4,7 @@ import { CdkTableModule } from '@angular/cdk/table';
 import { Product } from '../../models/product.model';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
-
+import { DataSourceProduct } from './data.source';
 @Component({
   selector: 'app-tables',
   standalone: true,
@@ -12,7 +12,7 @@ import { CommonModule } from '@angular/common';
   templateUrl: './tables.component.html',
 })
 export class TablesComponent {
-  products: Product[] = [];
+  dataSourceProducts = new DataSourceProduct();
   // las columnas se van a renderizar de acuerdo a la posicion del array
   colums: string[] = ['id', 'title', 'price', 'cover'];
   constructor(private http: HttpClient) {}
@@ -22,9 +22,8 @@ export class TablesComponent {
     this.http
       .get<Product[]>('https://api.escuelajs.co/api/v1/products')
       .subscribe((data) => {
-        this.products = data;
-        const productsPrice = this.products.map((product) => product.price);
-        this.total = productsPrice.reduce((price, total) => total + price, 0);
+        this.dataSourceProducts.init(data);
+        this.dataSourceProducts.getTotal();
       });
   }
 }
