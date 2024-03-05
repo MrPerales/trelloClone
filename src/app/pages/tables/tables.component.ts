@@ -6,6 +6,8 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { DataSourceProduct } from './data.source';
 import { BtnComponent } from '../../components/btn/btn.component';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { debounceTime } from 'rxjs';
 @Component({
   selector: 'app-tables',
   standalone: true,
@@ -15,6 +17,7 @@ import { BtnComponent } from '../../components/btn/btn.component';
     HttpClientModule,
     CommonModule,
     BtnComponent,
+    ReactiveFormsModule,
   ],
   templateUrl: './tables.component.html',
 })
@@ -24,6 +27,7 @@ export class TablesComponent {
   colums: string[] = ['id', 'title', 'price', 'cover', 'actions'];
   constructor(private http: HttpClient) {}
   total = 0;
+  searchIput = new FormControl('', { nonNullable: true });
 
   ngOnInit() {
     this.http
@@ -32,9 +36,15 @@ export class TablesComponent {
         this.dataSourceProducts.init(data);
         this.dataSourceProducts.getTotal();
       });
+    // input
+    this.searchIput.valueChanges
+      //delay para que espere a que el usuario termine de escribir
+      .pipe(debounceTime(300))
+      // get search
+      .subscribe((value) => this.dataSourceProducts.find(value));
   }
   update(product: Product) {
-    console.log(product);
+    // console.log(product);
 
     this.dataSourceProducts.update(product.id, {
       price: 10,

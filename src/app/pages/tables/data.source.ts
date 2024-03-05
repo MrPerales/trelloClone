@@ -7,6 +7,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 
 export class DataSourceProduct extends DataSource<Product> {
   //
+  originalData: Product[] = [];
   data = new BehaviorSubject<Product[]>([]);
   //metodo que devuelva un observable que sea un array de productos
   connect(): Observable<Product[]> {
@@ -17,6 +18,7 @@ export class DataSourceProduct extends DataSource<Product> {
 
   //   metodo
   init(products: Product[]) {
+    this.originalData = products;
     this.data.next(products);
   }
   getTotal() {
@@ -40,5 +42,17 @@ export class DataSourceProduct extends DataSource<Product> {
       //   actualizamos en todo el array
       this.data.next(products);
     }
+  }
+
+  find(query: string) {
+    const newProdcuts = this.originalData.filter(
+      (product) =>
+        // filtramos por varias formas (title , price , id)
+        product.title.toLowerCase().includes(query.toLowerCase()) ||
+        product.price.toString().includes(query) ||
+        product.id.toString().includes(query)
+    );
+    // console.log(newProdcuts);
+    this.data.next(newProdcuts);
   }
 }
