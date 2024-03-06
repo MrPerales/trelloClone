@@ -11,6 +11,7 @@ import { CdkAccordionModule } from '@angular/cdk/accordion';
 import {
   faPlus,
   faSquarePollHorizontal,
+  faTrashCan,
   faX,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -50,6 +51,7 @@ export class BoardComponent {
   faSquarePollHorizontal = faSquarePollHorizontal;
   faPlus = faPlus;
   faX = faX;
+  faTrashCan = faTrashCan;
   // forms
   newCardCtrl = new FormControl('', {
     nonNullable: true,
@@ -174,6 +176,16 @@ export class BoardComponent {
       // clear input
       this.newCardCtrl.setValue('');
     }
+  }
+  deleteColumn(id: string) {
+    console.log(id);
+
+    const columIndex = this.columns.findIndex(
+      (column) => column.id === id.toString()
+    );
+    const newColums = [...this.columns];
+    newColums.splice(columIndex, 1);
+    this.columns = newColums;
   }
   openDialog(todo: toDO) {
     const dialogRef = this.dialog.open(ModalComponent, {
