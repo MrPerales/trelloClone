@@ -55,8 +55,13 @@ export class BoardComponent {
     nonNullable: true,
     validators: [Validators.required, Validators.minLength(3)],
   });
+  newColumnCtrl = new FormControl('', {
+    nonNullable: true,
+    validators: [Validators.required, Validators.minLength(3)],
+  });
   // cdk accordion
   addCard = false;
+  checkColumn = false;
   columns: column[] = [
     {
       id: '1',
@@ -137,15 +142,20 @@ export class BoardComponent {
     moveItemInArray(this.columns, event.previousIndex, event.currentIndex);
   }
   addNewColumn() {
-    const id = Date.now();
-    const idString = id.toString();
-    // console.log(idString);
-
-    this.columns.push({
-      id: idString,
-      title: 'new Column',
-      todos: [],
-    });
+    if (this.newColumnCtrl.valid) {
+      const id = Date.now();
+      const idString = id.toString();
+      // console.log(idString);
+      const value = this.newColumnCtrl.value;
+      const newColumn = {
+        id: idString,
+        title: value,
+        todos: [],
+      };
+      this.columns.push(newColumn);
+      // clear input
+      this.newColumnCtrl.setValue('');
+    }
   }
   addNewCard(index: number) {
     if (this.newCardCtrl.valid) {
