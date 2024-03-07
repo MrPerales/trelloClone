@@ -10,8 +10,8 @@ import {
   faUser,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { BtnComponent } from '../btn/btn.component';
-import { toDO } from '../../models/toDo.Model';
+import { BtnComponent } from '../../../shared/components/btn/btn.component';
+import { toDO } from '../../../../models/toDo.Model';
 
 // tipado para el dato que nos va a llegar
 interface InputData {

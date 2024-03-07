@@ -5,8 +5,8 @@ import {
   moveItemInArray,
   transferArrayItem,
 } from '@angular/cdk/drag-drop';
-import { NavbarComponent } from '../../components/navbar/navbar.component';
-import { column, toDO } from '../../models/toDo.Model';
+import { NavbarComponent } from '../../../layout/components/navbar/navbar.component';
+import { column, toDO } from '../../../../models/toDo.Model';
 import { CdkAccordionModule } from '@angular/cdk/accordion';
 import {
   faPlus,
@@ -15,7 +15,7 @@ import {
   faX,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { BtnComponent } from '../../components/btn/btn.component';
+import { BtnComponent } from '../../../shared/components/btn/btn.component';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Dialog } from '@angular/cdk/dialog';
 import { ModalComponent } from '../../components/modal/modal.component';

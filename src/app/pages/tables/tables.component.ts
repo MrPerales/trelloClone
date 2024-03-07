@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
-import { NavbarComponent } from '../../components/navbar/navbar.component';
+import { NavbarComponent } from '../../modules/layout/components/navbar/navbar.component';
 import { CdkTableModule } from '@angular/cdk/table';
 import { Product } from '../../models/product.model';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { DataSourceProduct } from './data.source';
-import { BtnComponent } from '../../components/btn/btn.component';
+import { BtnComponent } from '../../modules/shared/components/btn/btn.component';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { debounceTime } from 'rxjs';
 @Component({
