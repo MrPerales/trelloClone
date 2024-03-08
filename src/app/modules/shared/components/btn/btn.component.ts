@@ -8,6 +8,8 @@ import { Component, Input } from '@angular/core';
   templateUrl: './btn.component.html',
 })
 export class BtnComponent {
+  @Input() disabled = false;
+  @Input() loading = false;
   @Input() typeBtn: 'button' | 'submit' | 'reset' = 'button';
   @Input() color: 'success' | 'primary' | 'danger' | 'light' | 'sky' =
     'success';
