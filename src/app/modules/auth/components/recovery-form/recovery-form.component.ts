@@ -3,6 +3,7 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { BtnComponent } from '../../../shared/components/btn/btn.component';
+import { CustomValidators } from '../../../../utils/validators';
 
 @Component({
   selector: 'app-recovery-form',
@@ -16,10 +17,12 @@ export class RecoveryFormComponent {
     {
       newPassword: ['', [Validators.minLength(6), Validators.required]],
       confirmPassword: ['', [Validators.required]],
+    },
+    {
+      validators: [
+        CustomValidators.MatchValidator('newPassword', 'confirmPassword'),
+      ],
     }
-    // {
-    //   validators:[  ]
-    // }
   );
   status: string = 'init';
   faEye = faEye;

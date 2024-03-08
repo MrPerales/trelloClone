@@ -3,6 +3,7 @@ import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { BtnComponent } from '../../../shared/components/btn/btn.component';
+import { CustomValidators } from '../../../../utils/validators';
 
 @Component({
   selector: 'app-register-form',
@@ -20,7 +21,9 @@ export class RegisterFormComponent {
       confirmPassword: [],
     },
     {
-      // validators
+      validators: [
+        CustomValidators.MatchValidator('password', 'confirmPassword'),
+      ],
     }
   );
   status: string = 'init';
