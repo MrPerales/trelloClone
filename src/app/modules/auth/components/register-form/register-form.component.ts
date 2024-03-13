@@ -1,9 +1,12 @@
 import { Component } from '@angular/core';
-import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { BtnComponent } from '../../../shared/components/btn/btn.component';
 import { CustomValidators } from '../../../../utils/validators';
+import { AuthService } from '../../../../services/auth.service';
+import { RequestStatus } from '../../../../models/request-status.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register-form',
@@ -12,13 +15,17 @@ import { CustomValidators } from '../../../../utils/validators';
   templateUrl: './register-form.component.html',
 })
 export class RegisterFormComponent {
-  constructor(private formBuiler: FormBuilder) {}
+  constructor(
+    private formBuiler: FormBuilder,
+    private router: Router,
+    private authServices: AuthService
+  ) {}
   form = this.formBuiler.nonNullable.group(
     {
-      name: [],
-      email: [],
-      password: [],
-      confirmPassword: [],
+      name: ['', [Validators.required]],
+      email: ['', [Validators.email, Validators.required]],
+      password: ['', [Validators.minLength(8), Validators.required]],
+      confirmPassword: ['', [Validators.required]],
     },
     {
       validators: [
@@ -26,15 +33,29 @@ export class RegisterFormComponent {
       ],
     }
   );
-  status: string = 'init';
+  status: RequestStatus = 'init';
   faEye = faEye;
   faEyeSlash = faEyeSlash;
   showPassword = false;
+  message = '';
+
   register() {
     if (this.form.valid) {
       this.status = 'loading';
       const { email, name, password } = this.form.getRawValue();
-      console.log(name, email, password);
+      this.authServices.register(email, password, name).subscribe({
+        next: () => {
+          this.status = 'succes';
+          this.router.navigate(['/login']);
+        },
+        error: (error) => {
+          console.log(error);
+          if (error.error.code === 'SQLITE_CONSTRAINT_UNIQUE') {
+            this.message = 'This user already exists';
+            this.status = 'failed';
+          }
+        },
+      });
     } else {
       this.form.markAllAsTouched();
     }

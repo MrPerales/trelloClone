@@ -73,7 +73,7 @@
       </p>
       } @if(form.controls.password.hasError('minlength')){
       <p class="font-medium text-red-500 text-xs mt-1 ml-1">
-        This field should be greater than 6 characters
+        This field should be greater than 8 characters
       </p>
       }
     </div>
@@ -97,13 +97,19 @@
       </p>
       } @if(form.controls.confirmPassword.hasError('minlength')){
       <p class="font-medium text-red-500 text-xs mt-1 ml-1">
-        This field should be greater than 6 characters
+        This field should be greater than 8 characters
       </p>
       }
     </div>
     }
   </div>
-  @if(form.controls.confirmPassword.touched){
+  @if(message.length >2){
+  <div>
+    <p class="font-medium text-red-500 text-xs mt-1 ml-1">
+      {{ message }}
+    </p>
+  </div>
+  } @if(form.controls.confirmPassword.touched){
 
   <div>
     @if (form.hasError('mismatch')) {
