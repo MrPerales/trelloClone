@@ -48,10 +48,13 @@ export class RegisterFormComponent {
     if (this.form.valid) {
       this.status = 'loading';
       const { email, name, password } = this.form.getRawValue();
-      this.authServices.register(email, password, name).subscribe({
+      // registramso y logeamos
+      this.authServices.registerAndLogin(email, password, name).subscribe({
         next: () => {
           this.status = 'succes';
-          this.router.navigate(['/login']);
+          // this.router.navigate(['/login']);
+          // cambiamos la ruta ya que registramos y damos acceso a la app
+          this.router.navigate(['app/boards']);
         },
         error: (error) => {
           console.log(error);

@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
+import { switchMap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -21,6 +22,12 @@ export class AuthService {
       name,
       password,
     });
+  }
+  registerAndLogin(email: string, password: string, name: string) {
+    return this.register(email, password, name).pipe(
+      // switch map es un Observable para ver que lo anterior esta OK
+      switchMap(() => this.login(email, password))
+    );
   }
   isAvailable(email: string) {
     return this.http.post<{ isAvailable: boolean }>(
