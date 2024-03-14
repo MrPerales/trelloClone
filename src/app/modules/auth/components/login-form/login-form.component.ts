@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faEye, faEyeSlash, faPen } from '@fortawesome/free-solid-svg-icons';
 import { BtnComponent } from '../../../shared/components/btn/btn.component';
@@ -17,8 +17,18 @@ export class LoginFormComponent {
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
-    private authServie: AuthService
-  ) {}
+    private authServie: AuthService,
+    private route: ActivatedRoute
+  ) {
+    // get query params
+    this.route.queryParamMap.subscribe((params) => {
+      const email = params.get('email');
+      // ya que puede ser nulo
+      if (email) {
+        this.form.controls.email.setValue(email);
+      }
+    });
+  }
 
   form = this.formBuilder.nonNullable.group({
     email: ['', [Validators.email, Validators.required]],
