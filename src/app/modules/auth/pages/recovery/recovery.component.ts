@@ -3,6 +3,7 @@ import { BackgroundComponent } from '../../components/background/background.comp
 import { HeaderComponent } from '../../components/header/header.component';
 import { FooterComponent } from '../../components/footer/footer.component';
 import { RecoveryFormComponent } from '../../components/recovery-form/recovery-form.component';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-recovery',
@@ -12,6 +13,7 @@ import { RecoveryFormComponent } from '../../components/recovery-form/recovery-f
     HeaderComponent,
     RecoveryFormComponent,
     FooterComponent,
+    RouterModule,
   ],
   templateUrl: './recovery.component.html',
 })

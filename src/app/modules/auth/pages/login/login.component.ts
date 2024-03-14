@@ -4,6 +4,7 @@ import { HeaderComponent } from '../../components/header/header.component';
 import { FooterComponent } from '../../components/footer/footer.component';
 import { BackgroundComponent } from '../../components/background/background.component';
 import { LoginFormComponent } from '../../components/login-form/login-form.component';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -13,6 +14,7 @@ import { LoginFormComponent } from '../../components/login-form/login-form.compo
     FooterComponent,
     BackgroundComponent,
     LoginFormComponent,
+    RouterModule,
   ],
   templateUrl: './login.component.html',
 })

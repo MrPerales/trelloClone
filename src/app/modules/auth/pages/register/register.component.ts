@@ -3,6 +3,7 @@ import { BackgroundComponent } from '../../components/background/background.comp
 import { HeaderComponent } from '../../components/header/header.component';
 import { RegisterFormComponent } from '../../components/register-form/register-form.component';
 import { FooterComponent } from '../../components/footer/footer.component';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -12,6 +13,7 @@ import { FooterComponent } from '../../components/footer/footer.component';
     HeaderComponent,
     RegisterFormComponent,
     FooterComponent,
+    RouterModule,
   ],
   templateUrl: './register.component.html',
 })
