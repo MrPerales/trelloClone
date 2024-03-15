@@ -9,6 +9,7 @@ import { LayoutComponent } from '../app/modules/layout/components/layout/layout.
 import { BoardsComponent } from '../app/modules/boards/pages/boards/boards.component';
 import { ProfileComponent } from './modules/profile/pages/profile/profile.component';
 import { UsersTableComponent } from '../app/modules/users/pages/users-table/users-table.component';
+import { authGuard } from './guards/auth.guard';
 
 export const routes: Routes = [
   {
@@ -35,6 +36,8 @@ export const routes: Routes = [
   // *************Rutes /App **************************
   {
     path: 'app',
+    // protect routes
+    canActivate: [authGuard],
     component: LayoutComponent,
     children: [
       {
