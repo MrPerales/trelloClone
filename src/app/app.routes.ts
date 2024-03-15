@@ -10,28 +10,36 @@ import { BoardsComponent } from '../app/modules/boards/pages/boards/boards.compo
 import { ProfileComponent } from './modules/profile/pages/profile/profile.component';
 import { UsersTableComponent } from '../app/modules/users/pages/users-table/users-table.component';
 import { authGuard } from './guards/auth.guard';
+import { redirectGuard } from './guards/redirect.guard';
 
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: 'login',
-    pathMatch: 'full',
-  },
-  {
-    path: 'login',
-    component: LoginComponent,
-  },
-  {
-    path: 'forgot-password',
-    component: ForgotPasswordComponent,
-  },
-  {
-    path: 'register',
-    component: RegisterComponent,
-  },
-  {
-    path: 'recovery',
-    component: RecoveryComponent,
+    // component: LoginComponent,
+    canActivate: [redirectGuard],
+    children: [
+      {
+        path: '',
+        redirectTo: 'login',
+        pathMatch: 'full',
+      },
+      {
+        path: 'login',
+        component: LoginComponent,
+      },
+      {
+        path: 'forgot-password',
+        component: ForgotPasswordComponent,
+      },
+      {
+        path: 'register',
+        component: RegisterComponent,
+      },
+      {
+        path: 'recovery',
+        component: RecoveryComponent,
+      },
+    ],
   },
   // *************Rutes /App **************************
   {
