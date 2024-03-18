@@ -5,12 +5,19 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faBell, faInfoCircle } from '@fortawesome/free-solid-svg-icons';
 import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../../../../services/auth.service';
+import { CommonModule } from '@angular/common';
 import { User } from '../../../../models/user.model';
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [BtnComponent, OverlayModule, FontAwesomeModule, RouterModule],
+  imports: [
+    BtnComponent,
+    OverlayModule,
+    FontAwesomeModule,
+    RouterModule,
+    CommonModule,
+  ],
   templateUrl: './navbar.component.html',
 })
 export class NavbarComponent {
@@ -21,18 +28,15 @@ export class NavbarComponent {
   fabell = faBell;
   faInfoCircle = faInfoCircle;
   user: User | null = null;
+
   logout() {
     this.authService.logout();
     this.router.navigate(['/login']);
   }
+
   ngOnInit() {
-    this.authService.getProfile().subscribe({
-      next: (user) => {
-        this.user = user;
-      },
-      error: (error) => {
-        console.log(error);
-      },
-    });
+    // ya que en el layout ejecutamos el getPrefile ya podemos
+    // llamar al observable
+    this.authService.user$.subscribe((user) => (this.user = user));
   }
 }

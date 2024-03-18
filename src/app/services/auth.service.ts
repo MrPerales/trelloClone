@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
-import { switchMap, tap } from 'rxjs';
+import { BehaviorSubject, switchMap, tap } from 'rxjs';
 import { TokenService } from './token.service';
 import { ResponseLogin } from '../models/auth.model';
 import { User } from '../models/user.model';
@@ -11,6 +11,11 @@ import { User } from '../models/user.model';
 })
 export class AuthService {
   apiUrl = environment.API_URL;
+  // observable
+  // nos permite guardar el usuario y poder distribuirlo
+  // de forma reactiva a cualquier componente sin
+  //  necesidad de hacer request , solo cuando la app inicie
+  user$ = new BehaviorSubject<User | null>(null);
 
   constructor(private http: HttpClient, private tokenServices: TokenService) {}
   login(email: string, password: string) {
@@ -63,10 +68,20 @@ export class AuthService {
   }
   getProfile() {
     const token = this.tokenServices.getToken();
-    return this.http.get<User>(`${this.apiUrl}/api/v1/auth/profile`, {
-      headers: {
-        authorization: `Bearer ${token}`,
-      },
-    });
+    return (
+      this.http
+        .get<User>(`${this.apiUrl}/api/v1/auth/profile`, {
+          headers: {
+            authorization: `Bearer ${token}`,
+          },
+        })
+        // pipe para llenar los datos en el observable
+        // para ser reactividad
+        .pipe(
+          tap((user) => {
+            this.user$.next(user);
+          })
+        )
+    );
   }
 }
