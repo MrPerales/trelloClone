@@ -55,14 +55,17 @@ export const routes: Routes = [
       },
       {
         path: 'boards',
+        canActivate: [authGuard],
         component: BoardsComponent,
       },
       {
         path: 'profile',
+        canActivate: [authGuard],
         component: ProfileComponent,
       },
       {
         path: 'users',
+        canActivate: [authGuard],
         component: UsersTableComponent,
       },
     ],
