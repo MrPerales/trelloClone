@@ -29,6 +29,7 @@ export class AuthService {
         // save token
         tap((response) => {
           this.tokenServices.saveToken(response.access_token);
+          this.tokenServices.saveRefreshToken(response.refresh_token);
         })
       );
   }
