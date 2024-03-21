@@ -22,10 +22,7 @@ export class UsersTableComponent {
     private authService: AuthService
   ) {}
   ngOnInit() {
-    this.usersServices.getUsers().subscribe((users) => {
-      this.dataSource.init(users);
-    });
-    // this.authService.getProfile().subscribe((user) => (this.user = user));
+    this.getUsers();
     // obtenermos datos de forma reactiva :D
     this.authService.user$.subscribe((user) => (this.user = user));
   }

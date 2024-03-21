@@ -67,6 +67,7 @@ export class AuthService {
   }
   logout() {
     this.tokenServices.removeToken();
+    this.tokenServices.removeRefreshToken();
   }
   getProfile() {
     return (
