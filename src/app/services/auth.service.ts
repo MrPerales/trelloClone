@@ -33,6 +33,21 @@ export class AuthService {
         })
       );
   }
+  refreshToken(refreshToken: string) {
+    return (
+      this.http
+        .post<ResponseLogin>(`${this.apiUrl}/api/v1/auth/refresh-token`, {
+          refreshToken,
+        })
+        // save new tokens
+        .pipe(
+          tap((response) => {
+            this.tokenServices.saveToken(response.access_token);
+            this.tokenServices.saveRefreshToken(response.refresh_token);
+          })
+        )
+    );
+  }
   register(email: string, password: string, name: string) {
     return this.http.post(`${this.apiUrl}/api/v1/auth/register`, {
       email,
