@@ -107,18 +107,14 @@
       <fa-icon [icon]="faClock"></fa-icon>Recently viewed
     </h1>
     <div class="grid grid-cols-4 mt-3 gap-2">
+      @for (board of boards; track $index) {
+
       <div class="w-full h-24 rounded text-white font-bold bg-blue-400 p-1">
-        <a routerLink="/app/boards/1" href=""> Demo </a>
+        <a [routerLink]="['/app/boards/', board.id]" href="">
+          {{ board.title }}
+        </a>
       </div>
-      <div class="w-full h-24 rounded text-white font-bold bg-blue-400 p-1">
-        <a routerLink="/app/boards/1" href=""> Demo </a>
-      </div>
-      <div class="w-full h-24 rounded text-white font-bold bg-blue-400 p-1">
-        <a routerLink="/app/boards/1" href=""> Demo </a>
-      </div>
-      <div class="w-full h-24 rounded text-white font-bold bg-blue-400 p-1">
-        <a routerLink="/app/boards/1" href=""> Demo </a>
-      </div>
+      }
     </div>
   </section>
 </main>

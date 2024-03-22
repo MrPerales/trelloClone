@@ -15,6 +15,8 @@ import {
   faWaveSquare,
 } from '@fortawesome/free-solid-svg-icons';
 import { RouterModule } from '@angular/router';
+import { MeService } from '../../../../services/me.service';
+import { Board } from '../../../../models/board.model';
 
 @Component({
   selector: 'app-boards',
@@ -38,6 +40,7 @@ export class BoardsComponent {
   faBorderAll = faBorderAll;
   faUsers = faUser;
   faGear = faGear;
+  boards: Board[] = [];
   // dinamic accordion
   // itemList = [
   //   {
@@ -74,4 +77,22 @@ export class BoardsComponent {
   //     ],
   //   },
   // ];
+  constructor(private meService: MeService) {}
+
+  ngOnInit() {
+    this.getBorard();
+  }
+
+  getBorard() {
+    this.meService.getMeBoards().subscribe({
+      next: (board) => {
+        console.log(board);
+
+        this.boards = board;
+      },
+      error: (error) => {
+        console.log(error);
+      },
+    });
+  }
 }
