@@ -11,6 +11,7 @@ import { ProfileComponent } from './modules/profile/pages/profile/profile.compon
 import { UsersTableComponent } from '../app/modules/users/pages/users-table/users-table.component';
 import { authGuard } from './guards/auth.guard';
 import { redirectGuard } from './guards/redirect.guard';
+import { BoardComponent } from './modules/boards/pages/board/board.component';
 
 export const routes: Routes = [
   {
@@ -57,6 +58,11 @@ export const routes: Routes = [
         path: 'boards',
         canActivate: [authGuard],
         component: BoardsComponent,
+      },
+      {
+        path: 'boards/:id',
+        canActivate: [authGuard],
+        component: BoardComponent,
       },
       {
         path: 'profile',

@@ -14,11 +14,17 @@ import {
   faUser,
   faWaveSquare,
 } from '@fortawesome/free-solid-svg-icons';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-boards',
   standalone: true,
-  imports: [NavbarComponent, FontAwesomeModule, CdkAccordionModule],
+  imports: [
+    NavbarComponent,
+    FontAwesomeModule,
+    CdkAccordionModule,
+    RouterModule,
+  ],
   templateUrl: './boards.component.html',
 })
 export class BoardsComponent {
@@ -33,39 +39,39 @@ export class BoardsComponent {
   faUsers = faUser;
   faGear = faGear;
   // dinamic accordion
-  itemList = [
-    {
-      label: 'Item 1',
-      items: [
-        {
-          label: 'Sub Item 1.1',
-        },
-        {
-          label: 'Sub Item 1.2',
-        },
-      ],
-    },
-    {
-      label: 'Item 2',
-      items: [
-        {
-          label: 'Sub Item 2.1',
-        },
-      ],
-    },
-    {
-      label: 'Item 3',
-      items: [
-        {
-          label: 'Sub Item 3.1',
-        },
-        {
-          label: 'Sub Item 3.2',
-        },
-        {
-          label: 'Sub Item 3.3',
-        },
-      ],
-    },
-  ];
+  // itemList = [
+  //   {
+  //     label: 'Item 1',
+  //     items: [
+  //       {
+  //         label: 'Sub Item 1.1',
+  //       },
+  //       {
+  //         label: 'Sub Item 1.2',
+  //       },
+  //     ],
+  //   },
+  //   {
+  //     label: 'Item 2',
+  //     items: [
+  //       {
+  //         label: 'Sub Item 2.1',
+  //       },
+  //     ],
+  //   },
+  //   {
+  //     label: 'Item 3',
+  //     items: [
+  //       {
+  //         label: 'Sub Item 3.1',
+  //       },
+  //       {
+  //         label: 'Sub Item 3.2',
+  //       },
+  //       {
+  //         label: 'Sub Item 3.3',
+  //       },
+  //     ],
+  //   },
+  // ];
 }
