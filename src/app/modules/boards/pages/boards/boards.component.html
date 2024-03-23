@@ -108,12 +108,11 @@
     </h1>
     <div class="grid grid-cols-4 mt-3 gap-2">
       @for (board of boards; track $index) {
-
-      <div class="w-full h-24 rounded text-white font-bold bg-blue-400 p-1">
-        <a [routerLink]="['/app/boards/', board.id]" href="">
+      <a [routerLink]="['/app/boards/', board.id]">
+        <app-card-color [backgroundColor]="board.backgroundColor">
           {{ board.title }}
-        </a>
-      </div>
+        </app-card-color>
+      </a>
       }
     </div>
   </section>

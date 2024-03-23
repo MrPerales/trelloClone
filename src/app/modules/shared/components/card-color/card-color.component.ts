@@ -1,9 +1,10 @@
+import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-card-color',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './card-color.component.html',
 })
 export class CardColorComponent {

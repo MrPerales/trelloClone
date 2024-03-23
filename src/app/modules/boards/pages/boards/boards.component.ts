@@ -17,6 +17,7 @@ import {
 import { RouterModule } from '@angular/router';
 import { MeService } from '../../../../services/me.service';
 import { Board } from '../../../../models/board.model';
+import { CardColorComponent } from '../../../shared/components/card-color/card-color.component';
 
 @Component({
   selector: 'app-boards',
@@ -26,6 +27,7 @@ import { Board } from '../../../../models/board.model';
     FontAwesomeModule,
     CdkAccordionModule,
     RouterModule,
+    CardColorComponent,
   ],
   templateUrl: './boards.component.html',
 })
