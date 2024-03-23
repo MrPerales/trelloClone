@@ -19,6 +19,9 @@ import { BtnComponent } from '../../../shared/components/btn/btn.component';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Dialog } from '@angular/cdk/dialog';
 import { ModalComponent } from '../../components/modal/modal.component';
+import { ActivatedRoute } from '@angular/router';
+import { Board } from '../../../../models/board.model';
+import { BoardsService } from '../../../../services/boards.service';
 @Component({
   selector: 'app-board',
   standalone: true,
@@ -46,7 +49,11 @@ import { ModalComponent } from '../../components/modal/modal.component';
   ],
 })
 export class BoardComponent {
-  constructor(private dialog: Dialog) {}
+  constructor(
+    private dialog: Dialog,
+    private route: ActivatedRoute,
+    private boardService: BoardsService
+  ) {}
   // icons
   faSquarePollHorizontal = faSquarePollHorizontal;
   faPlus = faPlus;
@@ -64,6 +71,7 @@ export class BoardComponent {
   // cdk accordion
   addCard = false;
   checkColumn = false;
+  boards: Board | null = null;
   columns: column[] = [
     {
       id: '1',
@@ -111,6 +119,27 @@ export class BoardComponent {
   todos: toDO[] = [];
   doing: toDO[] = [];
   done: toDO[] = [];
+  ngOnInit() {
+    this.route.paramMap.subscribe((params) => {
+      // obtenemos el id
+      const id = params.get('id');
+      if (id) {
+        this.getBoard(id);
+      }
+    });
+  }
+  private getBoard(id: Board['id']) {
+    this.boardService.getBoards(id).subscribe({
+      next: (board) => {
+        this.boards = board;
+        console.log(board);
+      },
+      error: (error) => {
+        console.log(error);
+      },
+    });
+  }
+
   drop(event: CdkDragDrop<toDO[]>) {
     // validacion para ver si el moviemiento es en la misma columna y
     // hacemos reordenamiento
