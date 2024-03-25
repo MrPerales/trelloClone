@@ -11,11 +11,11 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { BtnComponent } from '../../../shared/components/btn/btn.component';
-import { toDO } from '../../../../models/toDo.Model';
+import { Card } from '../../../../models/card.model';
 
 // tipado para el dato que nos va a llegar
 interface InputData {
-  todo: toDO;
+  card: Card;
 }
 // tipado para la respuesta
 interface OutputData {
@@ -29,7 +29,7 @@ interface OutputData {
   templateUrl: './modal.component.html',
 })
 export class ModalComponent {
-  todo: toDO;
+  card: Card;
   faClose = faClose;
   faCheckToSlot = faCheckToSlot;
   faBars = faBars;
@@ -44,7 +44,7 @@ export class ModalComponent {
     @Inject(DIALOG_DATA) data: InputData
   ) {
     // guardamos la data para poder renderizar
-    this.todo = data.todo;
+    this.card = data.card;
   }
   closeModal() {
     this.dialogRef.close();

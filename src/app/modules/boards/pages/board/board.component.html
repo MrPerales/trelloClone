@@ -16,11 +16,11 @@
       cdkDropListGroup
     >
       <!-- cdkDrag para poder mover horizontal las cards -->
-      @for (column of columns; track $index) {
+      @for (list of boards?.lists; track $index) {
       <div class="rounded bg-gray-200 w-72 p-2 mr-3 shrink-0" cdkDrag>
         <div class="flex justify-between py-1">
-          <h3 class="text-sm font-bold ml-2">{{ column.title }}</h3>
-          <div class="pr-3 cursor-pointer" (click)="deleteColumn(column.id)">
+          <h3 class="text-sm font-bold ml-2">{{ list.title }}</h3>
+          <div class="pr-3 cursor-pointer" (click)="deleteColumn(list.id)">
             <fa-icon [icon]="faTrashCan"></fa-icon>
           </div>
         </div>
@@ -32,17 +32,17 @@
         <div
           cdkDropList
           (cdkDropListDropped)="drop($event)"
-          [cdkDropListData]="column.todos"
+          [cdkDropListData]="list.cards"
           class="text-sm mt-2 min-h-[2rem]"
         >
-          @for (todo of column.todos; track $index) {
+          @for (card of list.cards; track $index) {
 
           <div
-            (click)="openDialog(todo)"
+            (click)="openDialog(card)"
             cdkDrag
             class="bg-white shadow p-2 rounded mt-2 border-b border-x-gray-300 cursor-pointer hover:bg-gray-400"
           >
-            {{ todo.title }}
+            {{ card.title }}
           </div>
           }
         </div>

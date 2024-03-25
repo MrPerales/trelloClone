@@ -22,6 +22,7 @@ import { ModalComponent } from '../../components/modal/modal.component';
 import { ActivatedRoute } from '@angular/router';
 import { Board } from '../../../../models/board.model';
 import { BoardsService } from '../../../../services/boards.service';
+import { Card } from '../../../../models/card.model';
 @Component({
   selector: 'app-board',
   standalone: true,
@@ -72,53 +73,51 @@ export class BoardComponent {
   addCard = false;
   checkColumn = false;
   boards: Board | null = null;
-  columns: column[] = [
-    {
-      id: '1',
-      title: 'toDo',
-      todos: [
-        {
-          id: '1',
-          title: 'buy a game',
-        },
-        {
-          id: '2',
-          title: 'wathc a movie',
-        },
-        {
-          id: '3',
-          title: 'Make dishes',
-        },
-      ],
-    },
-    {
-      id: '2',
-      title: 'doing',
-      todos: [
-        {
-          id: '4',
-          title: 'play games',
-        },
-        {
-          id: '6',
-          title: 'coding',
-        },
-      ],
-    },
-    {
-      id: '3',
-      title: 'done',
-      todos: [
-        {
-          id: '5',
-          title: 'make homework',
-        },
-      ],
-    },
-  ];
-  todos: toDO[] = [];
-  doing: toDO[] = [];
-  done: toDO[] = [];
+  // columns: column[] = [
+  //   {
+  //     id: '1',
+  //     title: 'toDo',
+  //     todos: [
+  //       {
+  //         id: '1',
+  //         title: 'buy a game',
+  //       },
+  //       {
+  //         id: '2',
+  //         title: 'wathc a movie',
+  //       },
+  //       {
+  //         id: '3',
+  //         title: 'Make dishes',
+  //       },
+  //     ],
+  //   },
+  //   {
+  //     id: '2',
+  //     title: 'doing',
+  //     todos: [
+  //       {
+  //         id: '4',
+  //         title: 'play games',
+  //       },
+  //       {
+  //         id: '6',
+  //         title: 'coding',
+  //       },
+  //     ],
+  //   },
+  //   {
+  //     id: '3',
+  //     title: 'done',
+  //     todos: [
+  //       {
+  //         id: '5',
+  //         title: 'make homework',
+  //       },
+  //     ],
+  //   },
+  // ];
+
   ngOnInit() {
     this.route.paramMap.subscribe((params) => {
       // obtenemos el id
@@ -140,7 +139,7 @@ export class BoardComponent {
     });
   }
 
-  drop(event: CdkDragDrop<toDO[]>) {
+  drop(event: CdkDragDrop<Card[]>) {
     // validacion para ver si el moviemiento es en la misma columna y
     // hacemos reordenamiento
     if (event.previousContainer === event.container) {
@@ -169,61 +168,59 @@ export class BoardComponent {
       );
     }
   }
-  dropHorizontal(event: CdkDragDrop<column[]>) {
-    moveItemInArray(this.columns, event.previousIndex, event.currentIndex);
+  dropHorizontal(event: CdkDragDrop<Card[]>) {
+    // moveItemInArray(this.boards, event.previousIndex, event.currentIndex);
   }
   addNewColumn() {
-    if (this.newColumnCtrl.valid) {
-      const id = Date.now();
-      const idString = id.toString();
-      // console.log(idString);
-      const value = this.newColumnCtrl.value;
-      const newColumn = {
-        id: idString,
-        title: value,
-        todos: [],
-      };
-      this.columns.push(newColumn);
-      // clear input
-      this.newColumnCtrl.setValue('');
-    }
+    // if (this.newColumnCtrl.valid) {
+    //   const id = Date.now();
+    //   const idString = id.toString();
+    //   // console.log(idString);
+    //   const value = this.newColumnCtrl.value;
+    //   const newColumn = {
+    //     id: idString,
+    //     title: value,
+    //     todos: [],
+    //   };
+    //   this.columns.push(newColumn);
+    //   // clear input
+    //   this.newColumnCtrl.setValue('');
+    // }
   }
   addNewCard(index: number) {
-    if (this.newCardCtrl.valid) {
-      const value = this.newCardCtrl.value;
-      // console.log(value);
-
-      const id = Date.now();
-      const idString = id.toString();
-      // add
-      const newTaskTitle = {
-        id: idString,
-        title: value,
-      };
-      this.columns[index].todos.push(newTaskTitle);
-
-      // clear input
-      this.newCardCtrl.setValue('');
-    }
+    // if (this.newCardCtrl.valid) {
+    //   const value = this.newCardCtrl.value;
+    //   // console.log(value);
+    //   const id = Date.now();
+    //   const idString = id.toString();
+    //   // add
+    //   const newTaskTitle = {
+    //     id: idString,
+    //     title: value,
+    //   };
+    //   this.boards[index].todos.push(newTaskTitle);
+    //   // clear input
+    //   this.newCardCtrl.setValue('');
+    // }
   }
   deleteColumn(id: string) {
     console.log(id);
 
-    const columIndex = this.columns.findIndex(
-      (column) => column.id === id.toString()
-    );
-    const newColums = [...this.columns];
-    newColums.splice(columIndex, 1);
-    this.columns = newColums;
+    // const columIndex = this.columns.findIndex(
+    //   (column) => column.id === id.toString()
+    // );
+    // const newColums = [...this.columns];
+    // newColums.splice(columIndex, 1);
+    // this.columns = newColums;
   }
-  openDialog(todo: toDO) {
+  openDialog(card: Card) {
     const dialogRef = this.dialog.open(ModalComponent, {
       minWidth: '300px',
       maxWidth: '50%',
       autoFocus: false,
       // mandamos los datos al modal
       data: {
-        todo: todo,
+        card: card,
       },
     });
     // para obtener una respuesta desde el modal

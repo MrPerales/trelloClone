@@ -5,4 +5,5 @@ export interface Card {
   title: string;
   position: number;
   list: List;
+  description: string;
 }
