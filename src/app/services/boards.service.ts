@@ -10,6 +10,7 @@ import { Card } from '../models/card.model';
 })
 export class BoardsService {
   constructor(private http: HttpClient) {}
+  bufferSpace = 65535;
   apiUrl = environment.API_URL;
   getBoards(id: Board['id']) {
     return this.http.get<Board>(`${this.apiUrl}/api/v1/boards/${id}`, {
@@ -18,22 +19,32 @@ export class BoardsService {
   }
   getPosition(cards: Card[], currentIndex: number) {
     if (cards.length === 1) {
-      return 'is New';
+      // return 'is New';
+      return this.bufferSpace;
     }
     if (cards.length > 2 && currentIndex === 0) {
-      return 'is top';
+      // cads[1] ya que es la que estaba antes en el top
+      const topPosition = cards[1].position / 2;
+      return topPosition;
+      // return 'is top';
     }
     // variable para tener un parametro que comparar con currentIndex
     const lastIndex = cards.length - 1;
     // cards.length > 1 ya que minimo tiene que tener 1 elemento
     if (cards.length > 1 && currentIndex > 0 && currentIndex < lastIndex) {
-      return 'is middle';
+      //  sacamos el promedio de las posiciones adyacentes
+      const previousPosition = cards[currentIndex - 1].position;
+      const nextPosition = cards[currentIndex + 1].position;
+      const middlePosition = (previousPosition + nextPosition) / 2;
+      return middlePosition;
+      // return 'is middle';
     }
     if (cards.length > 1 && currentIndex === lastIndex) {
-      return 'is bottom';
+      // cads[lastIndex-1] ya que es la que estaba antes en el bottom
+      const bottomPosition = cards[lastIndex - 1].position;
+      return bottomPosition + this.bufferSpace;
+      // return 'is bottom';
     }
-
-    console.log(currentIndex);
 
     return 0;
   }
