@@ -167,6 +167,12 @@ export class BoardComponent {
         event.currentIndex
       );
     }
+    // position cards
+    const response = this.boardService.getPosition(
+      event.container.data,
+      event.currentIndex
+    );
+    console.log(response);
   }
   dropHorizontal(event: CdkDragDrop<Card[]>) {
     // moveItemInArray(this.boards, event.previousIndex, event.currentIndex);
