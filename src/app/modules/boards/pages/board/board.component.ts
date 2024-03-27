@@ -23,6 +23,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Board } from '../../../../models/board.model';
 import { BoardsService } from '../../../../services/boards.service';
 import { Card } from '../../../../models/card.model';
+import { CardsService } from '../../../../services/cards.service';
 @Component({
   selector: 'app-board',
   standalone: true,
@@ -53,7 +54,8 @@ export class BoardComponent {
   constructor(
     private dialog: Dialog,
     private route: ActivatedRoute,
-    private boardService: BoardsService
+    private boardService: BoardsService,
+    private cardsService: CardsService
   ) {}
   // icons
   faSquarePollHorizontal = faSquarePollHorizontal;
@@ -168,11 +170,14 @@ export class BoardComponent {
       );
     }
     // position cards
-    const response = this.boardService.getPosition(
+    const position = this.boardService.getPosition(
       event.container.data,
       event.currentIndex
     );
-    console.log(response);
+    // lista[position]
+    const card = event.container.data[event.currentIndex];
+    // console.log(position);
+    this.updateCard(card, position);
   }
   dropHorizontal(event: CdkDragDrop<Card[]>) {
     // moveItemInArray(this.boards, event.previousIndex, event.currentIndex);
@@ -231,5 +236,16 @@ export class BoardComponent {
     });
     // para obtener una respuesta desde el modal
     dialogRef.closed.subscribe((output) => console.log(output));
+  }
+  // update card position
+  updateCard(card: Card, position: number) {
+    this.cardsService.update(card.id, { position }).subscribe({
+      next: (cardUodate) => {
+        console.log(cardUodate);
+      },
+      error: (error) => {
+        console.log(error);
+      },
+    });
   }
 }
