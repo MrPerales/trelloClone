@@ -30,6 +30,7 @@
            entre listas en cada lista -->
 
         <div
+          [id]="list.id"
           cdkDropList
           (cdkDropListDropped)="drop($event)"
           [cdkDropListData]="list.cards"

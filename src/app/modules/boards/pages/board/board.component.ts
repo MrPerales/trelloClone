@@ -22,7 +22,7 @@ import { ModalComponent } from '../../components/modal/modal.component';
 import { ActivatedRoute } from '@angular/router';
 import { Board } from '../../../../models/board.model';
 import { BoardsService } from '../../../../services/boards.service';
-import { Card } from '../../../../models/card.model';
+import { Card, UpdateCardDto } from '../../../../models/card.model';
 import { CardsService } from '../../../../services/cards.service';
 @Component({
   selector: 'app-board',
@@ -176,8 +176,11 @@ export class BoardComponent {
     );
     // lista[position]
     const card = event.container.data[event.currentIndex];
-    // console.log(position);
-    this.updateCard(card, position);
+    // para obtener el id de la lista se agrega en el template en la seccion de cdkDropList
+    // como [id]=list.id
+    const listId = event.container.id;
+    // console.log(listId);
+    this.updateCard(card, position, listId);
   }
   dropHorizontal(event: CdkDragDrop<Card[]>) {
     // moveItemInArray(this.boards, event.previousIndex, event.currentIndex);
@@ -238,8 +241,8 @@ export class BoardComponent {
     dialogRef.closed.subscribe((output) => console.log(output));
   }
   // update card position
-  updateCard(card: Card, position: number) {
-    this.cardsService.update(card.id, { position }).subscribe({
+  updateCard(card: Card, position: number, listId: UpdateCardDto['listId']) {
+    this.cardsService.update(card.id, { position, listId }).subscribe({
       next: (cardUodate) => {
         console.log(cardUodate);
       },
