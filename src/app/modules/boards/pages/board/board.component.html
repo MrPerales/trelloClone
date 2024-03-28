@@ -47,49 +47,6 @@
           </div>
           }
         </div>
-        <!-- <cdk-accordion>
-          <cdk-accordion-item #accordionAddCard="cdkAccordionItem">
-            <div class="flex flex-col gap-4 w-full mt-3">
-              input
-              <div
-                class="rounded bg-gray-200 flex flex-col"
-                [style.display]="accordionAddCard.expanded ? '' : 'none'"
-              >
-                <input
-                  placeholder="Enter a title for  the card"
-                  class="w-full rounded font-light"
-                  type="text"
-                  [formControl]="newCardCtrl"
-                  (keydown.enter)="addNewCard($index)"
-                />
-
-                <div class="flex items-center px-1 py-1 gap-5 mt-2">
-                  <app-btn
-                    (click)="addNewCard($index)"
-                    [typeBtn]="'button'"
-                    [color]="'primary'"
-                  >
-                    Add card
-                  </app-btn>
-                  bottob close
-                  <button (click)="accordionAddCard.toggle()" type="button">
-                    <fa-icon class="font-bold" [icon]="faX"></fa-icon>
-                  </button>
-                </div>
-              </div>
-              button
-              <div
-                [style.display]="accordionAddCard.expanded ? 'none' : ''"
-                class="w-full py-1 px-2 flex justify-between text-center font-light"
-              >
-                <button (click)="accordionAddCard.toggle()">
-                  <fa-icon [icon]="faPlus"></fa-icon> Add Card
-                </button>
-                <fa-icon [icon]="faSquarePollHorizontal"></fa-icon>
-              </div>
-            </div>
-          </cdk-accordion-item>
-        </cdk-accordion> -->
         <div class="mt-5">
           @if(!list.showFormCard){
           <div
@@ -102,8 +59,29 @@
             <fa-icon [icon]="faSquarePollHorizontal"></fa-icon>
           </div>
           } @if(list.showFormCard){
+          <div class="rounded bg-gray-200 flex flex-col">
+            <input
+              placeholder="Enter a title for this card"
+              class="w-full rounded font-light"
+              type="text"
+              [formControl]="newCardCtrl"
+              (keydown.enter)="addNewCard()"
+            />
 
-          <div>active Form</div>
+            <div class="flex items-center px-1 py-1 gap-5 mt-2">
+              <app-btn
+                (click)="addNewCard()"
+                [typeBtn]="'button'"
+                [color]="'primary'"
+              >
+                Add card
+              </app-btn>
+              <!-- bottob close -->
+              <button type="button" (click)="closeFormCard(list)">
+                <fa-icon class="font-bold" [icon]="faX"></fa-icon>
+              </button>
+            </div>
+          </div>
           }
         </div>
       </div>

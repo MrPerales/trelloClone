@@ -201,21 +201,21 @@ export class BoardComponent {
     //   this.newColumnCtrl.setValue('');
     // }
   }
-  addNewCard(index: number) {
-    // if (this.newCardCtrl.valid) {
-    //   const value = this.newCardCtrl.value;
-    //   // console.log(value);
-    //   const id = Date.now();
-    //   const idString = id.toString();
-    //   // add
-    //   const newTaskTitle = {
-    //     id: idString,
-    //     title: value,
-    //   };
-    //   this.boards[index].todos.push(newTaskTitle);
-    //   // clear input
-    //   this.newCardCtrl.setValue('');
-    // }
+  addNewCard() {
+    if (this.newCardCtrl.valid) {
+      const value = this.newCardCtrl.value;
+      console.log(value);
+      // const id = Date.now();
+      // const idString = id.toString();
+      // // add
+      // const newTaskTitle = {
+      //   id: idString,
+      //   title: value,
+      // };
+      // this.boards[index].todos.push(newTaskTitle);
+      // clear input
+      this.newCardCtrl.setValue('');
+    }
   }
   deleteColumn(id: string) {
     console.log(id);
@@ -269,5 +269,8 @@ export class BoardComponent {
         };
       });
     }
+  }
+  closeFormCard(list: List) {
+    list.showFormCard = false;
   }
 }
