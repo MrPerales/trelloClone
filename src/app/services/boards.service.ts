@@ -59,4 +59,17 @@ export class BoardsService {
 
     return 0;
   }
+  getPositionNewCard(cards: Card[]) {
+    // solo tenemos dos opc si es nueva en toda la lista va al principio
+    // y si no hasta el final
+    if (cards.length === 0) {
+      // return 'is New';
+      return this.bufferSpace;
+    }
+    // agregamos al final de la lista
+    const lastIndex = cards.length - 1;
+    // quitamos el -1 ya que no tiene card atras
+    const bottomPosition = cards[lastIndex].position;
+    return bottomPosition + this.bufferSpace;
+  }
 }

@@ -201,20 +201,28 @@ export class BoardComponent {
     //   this.newColumnCtrl.setValue('');
     // }
   }
-  addNewCard() {
-    if (this.newCardCtrl.valid) {
-      const value = this.newCardCtrl.value;
-      console.log(value);
-      // const id = Date.now();
-      // const idString = id.toString();
-      // // add
-      // const newTaskTitle = {
-      //   id: idString,
-      //   title: value,
-      // };
-      // this.boards[index].todos.push(newTaskTitle);
-      // clear input
-      this.newCardCtrl.setValue('');
+  addNewCard(list: List) {
+    if (this.newCardCtrl.valid && this.boards) {
+      const title = this.newCardCtrl.value;
+      // console.log(value);
+      this.cardsService
+        .create({
+          title: title,
+          listId: list.id,
+          boardId: this.boards.id,
+          position: this.boardService.getPositionNewCard(list.cards),
+        })
+        .subscribe({
+          next: (card) => {
+            list.cards.push(card);
+            // clear input
+            this.newCardCtrl.setValue('');
+            list.showFormCard = false;
+          },
+          error: (error) => {
+            console.log(error);
+          },
+        });
     }
   }
   deleteColumn(id: string) {

@@ -65,12 +65,12 @@
               class="w-full rounded font-light"
               type="text"
               [formControl]="newCardCtrl"
-              (keydown.enter)="addNewCard()"
+              (keydown.enter)="addNewCard(list)"
             />
 
             <div class="flex items-center px-1 py-1 gap-5 mt-2">
               <app-btn
-                (click)="addNewCard()"
+                (click)="addNewCard(list)"
                 [typeBtn]="'button'"
                 [color]="'primary'"
               >
