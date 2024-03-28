@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import {
   FormBuilder,
   FormControl,
@@ -19,6 +19,7 @@ import { Router } from '@angular/router';
   templateUrl: './board-form.component.html',
 })
 export class BoardFormComponent {
+  @Output() closeOverlay = new EventEmitter<boolean>();
   constructor(
     private formBuilder: FormBuilder,
     private boardsService: BoardsService,
@@ -39,6 +40,7 @@ export class BoardFormComponent {
       console.log(title, backgroundColor);
       this.boardsService.createNewBoard(title, backgroundColor).subscribe({
         next: (board) => {
+          this.closeOverlay.next(false);
           this.router.navigate(['/app/boards', board.id]);
         },
         error: (error) => {

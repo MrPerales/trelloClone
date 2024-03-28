@@ -49,4 +49,7 @@ export class NavbarComponent {
     // llamar al observable
     this.authService.user$.subscribe((user) => (this.user = user));
   }
+  closeOverlay(event: boolean) {
+    this.isOpenOverlayCreateBoard = event;
+  }
 }
