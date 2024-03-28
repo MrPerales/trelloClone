@@ -6,7 +6,6 @@ import {
   transferArrayItem,
 } from '@angular/cdk/drag-drop';
 import { NavbarComponent } from '../../../layout/components/navbar/navbar.component';
-import { column, toDO } from '../../../../models/toDo.Model';
 import { CdkAccordionModule } from '@angular/cdk/accordion';
 import {
   faPlus,
@@ -24,6 +23,7 @@ import { Board } from '../../../../models/board.model';
 import { BoardsService } from '../../../../services/boards.service';
 import { Card, UpdateCardDto } from '../../../../models/card.model';
 import { CardsService } from '../../../../services/cards.service';
+import { List } from '../../../../models/list.model';
 @Component({
   selector: 'app-board',
   standalone: true,
@@ -250,5 +250,24 @@ export class BoardComponent {
         console.log(error);
       },
     });
+  }
+  openFormCard(list: List) {
+    // verificamos si tenemos listas
+    if (this.boards?.lists) {
+      // modificamos el mismo estado ya que no estamos usando signals
+      this.boards.lists = this.boards.lists.map((itemList) => {
+        // modificando un solo elemento
+        if (itemList.id === list.id) {
+          return {
+            ...itemList,
+            showFormCard: true,
+          };
+        }
+        return {
+          ...itemList,
+          showFormCard: false,
+        };
+      });
+    }
   }
 }

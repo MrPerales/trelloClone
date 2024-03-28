@@ -47,10 +47,10 @@
           </div>
           }
         </div>
-        <cdk-accordion>
+        <!-- <cdk-accordion>
           <cdk-accordion-item #accordionAddCard="cdkAccordionItem">
             <div class="flex flex-col gap-4 w-full mt-3">
-              <!-- input -->
+              input
               <div
                 class="rounded bg-gray-200 flex flex-col"
                 [style.display]="accordionAddCard.expanded ? '' : 'none'"
@@ -71,12 +71,13 @@
                   >
                     Add card
                   </app-btn>
+                  bottob close
                   <button (click)="accordionAddCard.toggle()" type="button">
                     <fa-icon class="font-bold" [icon]="faX"></fa-icon>
                   </button>
                 </div>
               </div>
-              <!-- button -->
+              button
               <div
                 [style.display]="accordionAddCard.expanded ? 'none' : ''"
                 class="w-full py-1 px-2 flex justify-between text-center font-light"
@@ -88,7 +89,23 @@
               </div>
             </div>
           </cdk-accordion-item>
-        </cdk-accordion>
+        </cdk-accordion> -->
+        <div class="mt-5">
+          @if(!list.showFormCard){
+          <div
+            class="w-full py-1 px-2 flex justify-between items-center text-center font-light"
+          >
+            <app-btn color="light" (click)="openFormCard(list)">
+              <fa-icon [icon]="faPlus"></fa-icon>
+              <span> Add a Card </span>
+            </app-btn>
+            <fa-icon [icon]="faSquarePollHorizontal"></fa-icon>
+          </div>
+          } @if(list.showFormCard){
+
+          <div>active Form</div>
+          }
+        </div>
       </div>
       }
       <div>
