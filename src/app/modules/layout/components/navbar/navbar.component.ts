@@ -2,7 +2,12 @@ import { Component } from '@angular/core';
 import { BtnComponent } from '../../../shared/components/btn/btn.component';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { faBell, faInfoCircle } from '@fortawesome/free-solid-svg-icons';
+import {
+  faAngleDown,
+  faBell,
+  faClose,
+  faInfoCircle,
+} from '@fortawesome/free-solid-svg-icons';
 import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../../../../services/auth.service';
 import { CommonModule } from '@angular/common';
@@ -24,9 +29,12 @@ export class NavbarComponent {
   constructor(private authService: AuthService, private router: Router) {}
   // para abir overlay
   isOpen = false;
+  isOpenOverlayCreateBoard = false;
   // icons
   fabell = faBell;
   faInfoCircle = faInfoCircle;
+  faAngleDown = faAngleDown;
+  faClose = faClose;
   user: User | null = null;
 
   logout() {

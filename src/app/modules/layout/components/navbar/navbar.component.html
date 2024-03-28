@@ -22,7 +22,18 @@
             </a>
           </li>
           <li>
-            <app-btn [typeBtn]="'button'" [color]="'sky'">Create</app-btn>
+            <app-btn
+              (click)="isOpenOverlayCreateBoard = !isOpenOverlayCreateBoard"
+              cdkOverlayOrigin
+              #createBoardOverlay="cdkOverlayOrigin"
+              [typeBtn]="'button'"
+              [color]="'sky'"
+            >
+              <div class="flex space-x-2 text-left">
+                <span> Create </span>
+                <fa-icon [icon]="faAngleDown"></fa-icon>
+              </div>
+            </app-btn>
           </li>
         </ul>
       </div>
@@ -125,5 +136,31 @@
         </button>
       </li>
     </ul>
+  </div>
+</ng-template>
+<!-- OverlayCreateBoard  -->
+<ng-template
+  cdkConnectedOverlay
+  [cdkConnectedOverlayOrigin]="createBoardOverlay"
+  [cdkConnectedOverlayOpen]="isOpenOverlayCreateBoard"
+  (overlayOutsideClick)="isOpenOverlayCreateBoard = !isOpenOverlayCreateBoard"
+>
+  <div
+    class="z-50 my-4 w-60 text-base list-none bg-white rounded divide-y divide-gray-100 shadow"
+  >
+    <div class="py-3 px-4 flex justify-between">
+      <span class="block text-sm text-center text-gray-900"
+        >create New Board</span
+      >
+      <button
+        (click)="isOpenOverlayCreateBoard = !isOpenOverlayCreateBoard"
+        class="block text-sm text-gray-900"
+      >
+        <fa-icon [icon]="faClose"></fa-icon>
+      </button>
+    </div>
+    <div class="py-3 px-4 flex justify-between">
+      <!-- content -->
+    </div>
   </div>
 </ng-template>
