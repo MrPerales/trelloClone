@@ -12,6 +12,7 @@ import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../../../../services/auth.service';
 import { CommonModule } from '@angular/common';
 import { User } from '../../../../models/user.model';
+import { BoardFormComponent } from '../board-form/board-form.component';
 
 @Component({
   selector: 'app-navbar',
@@ -22,6 +23,7 @@ import { User } from '../../../../models/user.model';
     FontAwesomeModule,
     RouterModule,
     CommonModule,
+    BoardFormComponent,
   ],
   templateUrl: './navbar.component.html',
 })
