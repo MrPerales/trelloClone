@@ -5,6 +5,7 @@ import { Board } from '../models/board.model';
 import { checkToken } from '../interceptors/token.interceptor';
 import { Card } from '../models/card.model';
 import { Colors } from '../models/colors.model';
+import { List } from '../models/list.model';
 
 @Injectable({
   providedIn: 'root',
@@ -59,17 +60,17 @@ export class BoardsService {
 
     return 0;
   }
-  getPositionNewCard(cards: Card[]) {
+  getPositionNewItems(elements: Card[] | List[]) {
     // solo tenemos dos opc si es nueva en toda la lista va al principio
     // y si no hasta el final
-    if (cards.length === 0) {
+    if (elements.length === 0) {
       // return 'is New';
       return this.bufferSpace;
     }
     // agregamos al final de la lista
-    const lastIndex = cards.length - 1;
+    const lastIndex = elements.length - 1;
     // quitamos el -1 ya que no tiene card atras
-    const bottomPosition = cards[lastIndex].position;
+    const bottomPosition = elements[lastIndex].position;
     return bottomPosition + this.bufferSpace;
   }
 }

@@ -24,6 +24,7 @@ import { BoardsService } from '../../../../services/boards.service';
 import { Card, UpdateCardDto } from '../../../../models/card.model';
 import { CardsService } from '../../../../services/cards.service';
 import { List } from '../../../../models/list.model';
+import { ListsService } from '../../../../services/lists.service';
 @Component({
   selector: 'app-board',
   standalone: true,
@@ -55,7 +56,8 @@ export class BoardComponent {
     private dialog: Dialog,
     private route: ActivatedRoute,
     private boardService: BoardsService,
-    private cardsService: CardsService
+    private cardsService: CardsService,
+    private listsService: ListsService
   ) {}
   // icons
   faSquarePollHorizontal = faSquarePollHorizontal;
@@ -187,10 +189,28 @@ export class BoardComponent {
   addNewList() {
     if (this.newListCtrl.valid && this.boards) {
       const title = this.newListCtrl.value;
-      console.log(title);
-
-      // clear input
-      this.newListCtrl.setValue('');
+      // console.log(title);
+      this.listsService
+        .create({
+          title: title,
+          boardId: this.boards.id,
+          position: this.boardService.getPositionNewItems(this.boards.lists),
+        })
+        .subscribe({
+          next: (list) => {
+            this.boards?.lists.push({
+              ...list,
+              // se le agrega cards para solucionar el bug del dragAndDrop entre listas
+              cards: [],
+            });
+            // clear input
+            this.newListCtrl.setValue('');
+            this.showListForm = false;
+          },
+          error: (error) => {
+            console.log(error);
+          },
+        });
     }
   }
   addNewCard(list: List) {
@@ -202,7 +222,7 @@ export class BoardComponent {
           title: title,
           listId: list.id,
           boardId: this.boards.id,
-          position: this.boardService.getPositionNewCard(list.cards),
+          position: this.boardService.getPositionNewItems(list.cards),
         })
         .subscribe({
           next: (card) => {
