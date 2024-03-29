@@ -67,13 +67,12 @@ export class BoardComponent {
     nonNullable: true,
     validators: [Validators.required, Validators.minLength(3)],
   });
-  newColumnCtrl = new FormControl('', {
+  newListCtrl = new FormControl('', {
     nonNullable: true,
     validators: [Validators.required, Validators.minLength(3)],
   });
   // cdk accordion
-  addCard = false;
-  checkColumn = false;
+  showListForm = false;
   boards: Board | null = null;
   // columns: column[] = [
   //   {
@@ -185,21 +184,14 @@ export class BoardComponent {
   dropHorizontal(event: CdkDragDrop<Card[]>) {
     // moveItemInArray(this.boards, event.previousIndex, event.currentIndex);
   }
-  addNewColumn() {
-    // if (this.newColumnCtrl.valid) {
-    //   const id = Date.now();
-    //   const idString = id.toString();
-    //   // console.log(idString);
-    //   const value = this.newColumnCtrl.value;
-    //   const newColumn = {
-    //     id: idString,
-    //     title: value,
-    //     todos: [],
-    //   };
-    //   this.columns.push(newColumn);
-    //   // clear input
-    //   this.newColumnCtrl.setValue('');
-    // }
+  addNewList() {
+    if (this.newListCtrl.valid && this.boards) {
+      const title = this.newListCtrl.value;
+      console.log(title);
+
+      // clear input
+      this.newListCtrl.setValue('');
+    }
   }
   addNewCard(list: List) {
     if (this.newCardCtrl.valid && this.boards) {
@@ -280,5 +272,8 @@ export class BoardComponent {
   }
   closeFormCard(list: List) {
     list.showFormCard = false;
+  }
+  closeFormList() {
+    this.showListForm = false;
   }
 }

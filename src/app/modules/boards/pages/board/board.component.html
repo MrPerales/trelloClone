@@ -87,43 +87,48 @@
       </div>
       }
       <div>
-        <cdk-accordion>
-          <cdk-accordion-item #accordionAddColumn="cdkAccordionItem">
-            <div
-              class="w-80 rounded bg-gray-200 flex flex-col p-3"
-              [style.display]="accordionAddColumn.expanded ? '' : 'none'"
-            >
-              <input
-                placeholder="Enter a title for  the card"
-                class="w-full rounded font-light"
-                type="text"
-                [formControl]="newColumnCtrl"
-                (keydown.enter)="addNewColumn()"
-              />
+        @if(!showListForm){
 
-              <div class="flex items-center px-1 py-1 gap-5 mt-2">
-                <app-btn
-                  [typeBtn]="'button'"
-                  [color]="'primary'"
-                  (click)="addNewColumn()"
-                >
-                  Add Column
-                </app-btn>
-                <button (click)="accordionAddColumn.toggle()" type="button">
-                  <fa-icon class="font-bold" [icon]="faX"></fa-icon>
-                </button>
-              </div>
+        <div>
+          <app-btn
+            [typeBtn]="'button'"
+            [color]="'light'"
+            (click)="showListForm = !showListForm"
+          >
+            Add another List
+          </app-btn>
+        </div>
+        } @if(showListForm){
+
+        <div>
+          <div class="w-80 rounded bg-gray-200 flex flex-col p-3">
+            <input
+              placeholder="Enter a title for this list"
+              class="w-full rounded font-light"
+              type="text"
+              [formControl]="newListCtrl"
+              (keydown.enter)="addNewList()"
+            />
+
+            <div class="flex items-center px-1 py-1 gap-5 mt-2">
+              <app-btn
+                [typeBtn]="'button'"
+                [color]="'primary'"
+                (click)="addNewList()"
+              >
+                Add List
+              </app-btn>
+              <button type="button">
+                <fa-icon
+                  class="font-bold"
+                  [icon]="faX"
+                  (click)="closeFormList()"
+                ></fa-icon>
+              </button>
             </div>
-          </cdk-accordion-item>
-        </cdk-accordion>
-        <app-btn
-          [typeBtn]="'button'"
-          [color]="'light'"
-          (click)="accordionAddColumn.toggle()"
-          [style.display]="accordionAddColumn.expanded ? 'none' : ''"
-        >
-          Add Column
-        </app-btn>
+          </div>
+        </div>
+        }
       </div>
     </div>
   </div>
