@@ -25,6 +25,8 @@ import { Card, UpdateCardDto } from '../../../../models/card.model';
 import { CardsService } from '../../../../services/cards.service';
 import { List } from '../../../../models/list.model';
 import { ListsService } from '../../../../services/lists.service';
+import { BACKGROUNDCOLORS } from '../../../../models/colors.model';
+import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-board',
   standalone: true,
@@ -35,6 +37,7 @@ import { ListsService } from '../../../../services/lists.service';
     FontAwesomeModule,
     BtnComponent,
     ReactiveFormsModule,
+    CommonModule,
   ],
   templateUrl: './board.component.html',
   styles: [
@@ -76,6 +79,7 @@ export class BoardComponent {
   // cdk accordion
   showListForm = false;
   boards: Board | null = null;
+  colorBackground = BACKGROUNDCOLORS;
   // columns: column[] = [
   //   {
   //     id: '1',
@@ -295,5 +299,12 @@ export class BoardComponent {
   }
   closeFormList() {
     this.showListForm = false;
+  }
+  get colors() {
+    if (this.boards) {
+      const color = this.colorBackground[this.boards.backgroundColor];
+      return color ? color : {};
+    }
+    return {};
   }
 }
