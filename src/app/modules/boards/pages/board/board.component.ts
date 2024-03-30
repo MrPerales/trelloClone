@@ -134,11 +134,18 @@ export class BoardComponent {
       }
     });
   }
+  ngOnDestroy() {
+    // para que al salir de board cambie el color a sky y no mantenga el color del board
+    this.boardService.setBackgroundColor('sky');
+  }
   private getBoard(id: Board['id']) {
     this.boardService.getBoards(id).subscribe({
       next: (board) => {
         this.boards = board;
-        console.log(board);
+        // console.log(board);
+        // seteamos el stado con el color que queremos y
+        //  despues poder usarlo en el navbar
+        this.boardService.setBackgroundColor(board.backgroundColor);
       },
       error: (error) => {
         console.log(error);

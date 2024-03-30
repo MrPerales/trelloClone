@@ -13,6 +13,11 @@ import { AuthService } from '../../../../services/auth.service';
 import { CommonModule } from '@angular/common';
 import { User } from '../../../../models/user.model';
 import { BoardFormComponent } from '../board-form/board-form.component';
+import { BoardsService } from '../../../../services/boards.service';
+import {
+  Colors,
+  NAVBARBACKGROUNDCOLORS,
+} from '../../../../models/colors.model';
 
 @Component({
   selector: 'app-navbar',
@@ -28,7 +33,21 @@ import { BoardFormComponent } from '../board-form/board-form.component';
   templateUrl: './navbar.component.html',
 })
 export class NavbarComponent {
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private boardService: BoardsService
+  ) {
+    // pasamos el valor que nos mandaron desde el bopard hasta el nav
+    this.boardService.navBarBackgroundColor$.subscribe((color) => {
+      this.navBarBackgroundColor = color;
+    });
+  }
+  //navbar  Color
+  // variable donde esta el estado del color
+  navBarBackgroundColor: Colors = 'sky';
+  // variable donde esta el arreglo de colores
+  navBarColors = NAVBARBACKGROUNDCOLORS;
   // para abir overlay
   isOpen = false;
   isOpenOverlayCreateBoard = false;
@@ -51,5 +70,9 @@ export class NavbarComponent {
   }
   closeOverlay(event: boolean) {
     this.isOpenOverlayCreateBoard = event;
+  }
+  get colors() {
+    const color = this.navBarColors[this.navBarBackgroundColor];
+    return color ? color : {};
   }
 }

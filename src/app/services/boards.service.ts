@@ -6,6 +6,7 @@ import { checkToken } from '../interceptors/token.interceptor';
 import { Card } from '../models/card.model';
 import { Colors } from '../models/colors.model';
 import { List } from '../models/list.model';
+import { BehaviorSubject, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -14,10 +15,14 @@ export class BoardsService {
   constructor(private http: HttpClient) {}
   bufferSpace = 65535;
   apiUrl = environment.API_URL;
+  // estado gloabal
+  //   ('valor por defecto ')
+  navBarBackgroundColor$ = new BehaviorSubject<Colors>('sky');
   getBoards(id: Board['id']) {
     return this.http.get<Board>(`${this.apiUrl}/api/v1/boards/${id}`, {
       context: checkToken(),
-    });
+    }); //se puede setear el navBar color desde aqui tamabien
+    // .pipe(tap((board) => this.setBackgroundColor(board.backgroundColor)));
   }
   createNewBoard(title: string, backgroundColor: Colors) {
     return this.http.post<Board>(
@@ -72,5 +77,9 @@ export class BoardsService {
     // quitamos el -1 ya que no tiene card atras
     const bottomPosition = elements[lastIndex].position;
     return bottomPosition + this.bufferSpace;
+  }
+  // metodo para poder cambiar los colores
+  setBackgroundColor(color: Colors) {
+    this.navBarBackgroundColor$.next(color);
   }
 }
